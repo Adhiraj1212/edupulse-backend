@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: "host.docker.internal"
+      DB_USER: "student"
+      DB_PASSWORD: "change_me"
+      DB_DATABASE: "student_db"
+      DB_TABLE: "students"
+      RABBITMQ_URL: "amqp://edupulse:change_me@host.docker.internal:5672"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

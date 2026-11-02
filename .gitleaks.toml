@@ -1,0 +1,12 @@
+title = "edupulse-backend gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Known-safe paths, documentation and sample data"
+paths = [
+  '''README\.md$''',
+  '''\.example$''',
+  '''all_students\.xlsx$''',
+]
