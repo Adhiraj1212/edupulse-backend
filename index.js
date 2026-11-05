@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
+app.get("/healthz", (req, res) => res.json({ status: "ok" }));
 
 // Role check. The service is only reachable through nginx, which overwrites this header.
 function roleGuard(req, res, next) {

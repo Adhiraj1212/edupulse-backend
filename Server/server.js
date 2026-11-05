@@ -12,19 +12,23 @@ const actor = (req) => req.get("X-User-Name") || "unknown";
 // Load environment variables from .env file
 dotenv.config();
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-db.connect((err) => {
+db.getConnection((err, conn) => {
   if (err) {
-    console.error("Error connecting to MySQL:", err);
+    console.error("Error connecting to MySQL pool:", err);
     return;
   }
-  console.log("Connected to MySQL");
+  console.log("Connected to MySQL pool");
+  conn.release();
 });
 
 router.use(express.json());
